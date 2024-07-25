@@ -1,25 +1,36 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { User } from "./interfaces/User.interface";
 
 // Tipo Query
 const typeDefs = `#graphql
+
+    type Rol {
+        name: String!
+    }
+
     type User {
-        name: String
+        name: String!
         email: String
+        rol: Rol
     }
 
     type Query {
         users: [User!]!
+        roles: [Rol]
     }
 `;
 
-const users = [
+const users:User[] = [
     {
         name: "John",
-        email: "john@example.com"
+        email: "john@example.com",
+        rol: {
+            name: "User"
+        }
     },
     {
-        name: "Alberto",
+        name: "Mario",
         email: "alberto@example.com"
     },
     {
@@ -28,10 +39,23 @@ const users = [
     }
 ];
 
+const roles = [
+    {
+        name: "User",
+    },
+    {
+        name: "Admin",
+    },
+    {
+        name: "Dev",
+    }
+];
+
 // Resolvers
 const resolvers = {
     Query: {
-        users: () => users
+        users: () => users,
+        roles: () => roles
     }
 };
 
