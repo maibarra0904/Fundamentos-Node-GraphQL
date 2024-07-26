@@ -10,14 +10,23 @@ input UserID {
 
 type User {
     id: ID
-    name: String!
+    name: String
     email: String
-    rol: Rol
+    rol: Rol!
 }
 
 type Query {
     users: [User!]!
-    user(id: UserID!): [User]
+    user(id: UserID!): User
     roles: [Rol]
+    getPosts: [Post]!
+    posts: [Post]!
 }
+
+type Post {
+    id: ID!
+    title: String!
+    body: String!
+  }
+
 `;
