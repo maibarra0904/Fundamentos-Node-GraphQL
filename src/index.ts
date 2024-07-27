@@ -10,7 +10,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 async function startServer() {
     const {url} = await startStandaloneServer(server, {
         listen: {
-            port: 4000
+            port: +process.env.PORT || 4000
         },
         context: async ({ req }) => {
             // Agregar el contexto de la API consumida
